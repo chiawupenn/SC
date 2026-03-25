@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scotty Cameron - 精选圈 T 高尔夫服装</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #2c3e50; --gold: #d4af37; --dark: #1a252f; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header { background: white; border-radius: 16px; padding: 30px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
+        .brand-logo { font-size: 2.5em; color: var(--primary); font-weight: bold; margin-bottom: 10px; }
+        h1 { color: var(--primary); font-size: 2em; margin-bottom: 10px; }
+        .filters { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; padding: 0 10px; }
+        .filter-btn { background: white; color: var(--primary); border: 2px solid var(--primary); padding: 10px 20px; border-radius: 30px; cursor: pointer; font-size: 0.95em; font-weight: bold; transition: all 0.3s ease; white-space: nowrap; }
+        .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; transform: translateY(-2px); }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
+        .product-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .product-image { height: 220px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; background: #f8f9fa; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .product-image:hover img { transform: scale(1.05); }
+        .click-hint { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.7em; opacity: 0; transition: opacity 0.3s; }
+        .product-image:hover .click-hint { opacity: 1; }
+        .category-badge { position: absolute; top: 12px; left: 12px; background: var(--gold); color: var(--dark); padding: 6px 12px; border-radius: 15px; font-size: 0.75em; font-weight: bold; z-index: 10; }
+        .product-info { padding: 20px; }
+        .product-name { font-size: 1.1em; font-weight: bold; color: var(--primary); margin-bottom: 8px; line-height: 1.4; min-height: 50px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .product-color { color: #666; font-size: 0.9em; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+        .price-section { background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); color: white; padding: 12px; border-radius: 12px; margin-bottom: 12px; }
+        .price-label { font-size: 0.8em; opacity: 0.8; margin-bottom: 5px; }
+        .rmb-price { font-size: 1.6em; font-weight: bold; color: var(--gold); text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .sizes-section { background: #f8f9fa; padding: 15px; border-radius: 12px; }
+        .sizes-label { font-weight: bold; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 0.9em; }
+        .sizes-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .size-badge { background: var(--primary); color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8em; font-weight: bold; }
+        .size-unavailable { background: #d3d3d3; color: #999; padding: 4px 10px; border-radius: 12px; font-size: 0.8em; text-decoration: line-through; }
+        .one-size-badge { background: var(--gold); color: var(--dark); padding: 4px 10px; border-radius: 12px; font-size: 0.8em; font-weight: bold; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
+        .modal-content { position: relative; margin: 5% auto; padding: 20px; width: 90%; max-width: 1000px; background: white; border-radius: 16px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #eee; }
+        .modal-title { font-size: 1.4em; color: var(--primary); font-weight: bold; }
+        .close { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: #e74c3c; }
+        .gallery-container { display: flex; gap: 20px; }
+        .main-image { flex: 2; background: #f5f5f5; border-radius: 12px; padding: 20px; display: flex; align-items: center; justify-content: center; min-height: 400px; }
+        .main-image img { max-width: 350px; max-height: 400px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .thumbnail-container { flex: 1; display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; }
+        .thumbnail { padding: 8px; background: #f5f5f5; border-radius: 8px; cursor: pointer; transition: all 0.3s; text-align: center; height: 100px; display: flex; align-items: center; justify-content: center; }
+        .thumbnail:hover, .thumbnail.active { background: var(--primary); color: white; }
+        .modal-footer { margin-top: 20px; padding-top: 15px; border-top: 2px solid #eee; display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; }
+        .color-display { display: flex; align-items: center; gap: 10px; }
+        .price-badge { background: var(--gold); color: var(--dark); padding: 5px 12px; border-radius: 8px; font-weight: bold; }
+        
+        /* Image loading states */
+        .image-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #999; font-size: 2em; }
+        .image-error { display: none; }
+        
+        @media (max-width: 768px) { .brand-logo { font-size: 1.8em; } h1 { font-size: 1.5em; } .products-grid { grid-template-columns: 1fr; } .filter-btn { padding: 8px 16px; font-size: 0.9em; } .gallery-container { flex-direction: column; } .main-image img { max-width: 250px; max-height: 250px; } .thumbnail-container { max-height: 200px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand-logo">🏌️‍♂️ Scotty Cameron</div>
+            <h1>精选圈 T 高尔夫服装</h1>
+        </header>
+
+        <div id="filters" class="filters"></div>
+        <div id="productsGrid" class="products-grid"></div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">产品图片</h3>
+                <span class="close">&times;</span>
+            </div>
+            
+            <div class="gallery-container">
+                <div class="main-image">
+                    <img id="mainProductImage" alt="产品主图">
+                </div>
+                <div class="thumbnail-container" id="thumbnailContainer"></div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="color-display">
+                    <span style="font-weight: bold;">颜色:</span>
+                    <span id="modalColor"></span>
+                </div>
+                <div class="price-badge" id="modalPrice"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Data with REAL Images -->
+    <script>
+        // Color name translations to Chinese
+        const colorTranslations = {
+            'Khaki': '卡其色', 'Heather Black': '麻黑色', 'Black': '黑色', 'Navy': '海军蓝',
+            'Red/White/Blue': '红白蓝三色', 'White': '白色', 'Stream Blue': '河流蓝', 'Oyster': '牡蛎色',
+            'Purple Iris': '紫罗兰', 'White/Purple Iris': '白紫条纹', 'Blue Haze': '蓝色薄雾',
+            'Nordic Pine': '北欧松绿', 'Rosewood': '玫瑰木', 'Multi': '多色',
+            'Marine Nav/Cottage Blue': '海军蓝/乡村蓝', 'Riverbed': '河床灰', 'British Grey': '英伦灰',
+            'Pine Camo/Eve Tide': '松树林迷彩/潮汐色', 'Dark Heather Gray': '深麻灰色',
+            'Heather Maroon': '麻栗色', 'Midnight Navy': '午夜蓝', 'Indigo': '靛蓝色',
+            'Grey': '灰色', 'Carbon Black': '碳黑色', 'Ivory': '象牙白'
+        };
+
+        // ALL 41 PRODUCTS WITH REAL IMAGE PATHS
+        const productsData = [
+            {id:1,name:"Feelin' Lucky Flexfit Trucker Hat",chineseName:"精选圈 T 卡车帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"feelin_lucky_flexfit_trucker_hat.jpg"},
+            {id:2,name:"Two-Tone Horseshoe Retro Trucker Hat",chineseName:"双拼马蹄复古卡车帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"two-tone_horseshoe_retro_trucker_hat.jpg"},
+            {id:3,name:"Black Oval SC Crown Patch Melin Odysea Hydro Hat",chineseName:"黑色椭圆SC皇冠补丁水力帽",category:"special-hat",categoryId:51,rmbPrice:1200,size:"One Size",imageFile:"black_oval_sc_crown_patch_melin_odyssea_hydro_hat.jpg"},
+            {id:4,name:"Scotty Crown Retro Rope Hat",chineseName:"Scotty Crown 复古绳帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"scotty_crown_retro_rope_hat.jpg"},
+            {id:5,name:"Americana Beanie",chineseName:"美利奴羊毛帽",category:"beanie",categoryId:52,rmbPrice:640,size:"One Size",imageFile:"americana_beans.jpg"},
+            {id:6,name:"Agave Man & Clover Polo Shirt",chineseName:"龙舌兰男人和三叶草Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["M","L","XL"],imageFile:"agave_man_clover_polo_shirt.jpg"},
+            {id:7,name:"Stream Blue 7 Point Crown Polo Shirt",chineseName:"溪流蓝7点皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"stream_blue_7_point_crown_polo_shirt.jpg"},
+            {id:8,name:"Scotty Bulldog Oyster Roast Polo Shirt",chineseName:"Scotty斗牛牡蛎烤Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_bulldog_oyster_roast_polo_shirt.jpg"},
+            {id:9,name:"Jackpot Johnny Polo Shirt",chineseName:"Jackpot Johnny Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"jackpot_johnny_polo_shirt.jpg"},
+            {id:10,name:"Crown & Co. Polo Shirt",chineseName:"皇冠和公司Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_polo_shirt.jpg"},
+            {id:11,name:"7 Point Crown Lights Polo Shirt",chineseName:"7点皇冠灯Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"7_point_crown_lights_polo_shirt.jpg"},
+            {id:12,name:"Crown & Co. Striped Polo Shirt",chineseName:"皇冠和公司条纹Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_striped_polo_shirt.jpg"},
+            {id:13,name:"Hot Head Harry Polo Shirt",chineseName:"火爆Harry Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"hot_head_harry_polo_shirt_1.jpg"},
+            {id:14,name:"Jackpot Johnny Geo Skull Polo Shirt",chineseName:"Jackpot Johnny几何骷髅Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"jackpot_johnny_geo_skull_polo_shirt.jpg"},
+            {id:15,name:"Agave Man Tequila Sunrise Polo Shirt",chineseName:"龙舌兰男人龙舌兰日出Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"agave_man_tequila_sunrise_polo_shirt.jpg"},
+            {id:16,name:"Agave Man Cocktail Garnish Polo Shirt",chineseName:"龙舌兰男人鸡尾酒装饰Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"agave_man_cocktail_garnish_polo_shirt.jpg"},
+            {id:17,name:"Hot Head Harry Polo Shirt (Marine Nav)",chineseName:"火爆Harry Polo衫（海军导航）",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"hot_head_harry_polo_shirt_2.jpg"},
+            {id:18,name:"Scotty Dog Polo Shirt",chineseName:"Scotty狗Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_dog_polo_shirt.jpg"},
+            {id:19,name:"Striped 7 Point Crown Polo Shirt",chineseName:"条纹7点皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"striped_7_point_crown_polo_shirt.jpg"},
+            {id:20,name:"LS Peace Crown Polo Shirt",chineseName:"和平皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"ls_peace_crown_polo_shirt.jpg"},
+            {id:21,name:"Women's 7 Point Crown Zip Neck Polo Shirt",chineseName:"女士7点皇冠拉链领Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["XS","S","M","L","XL"],sizeAvailable:["XS","S","M","L","XL"],imageFile:"womens_7_point_crown_zip_neck_polo_shirt.jpg"},
+            {id:22,name:"Women's Scotty Dog Flora Knit Hoodie",chineseName:"女士Scotty狗花卉针织连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["XS","S","M","L","XL"],sizeAvailable:["S","M","L"],imageFile:"womens_scotty_dog_flora_knit_hoodie.jpg"},
+            {id:23,name:"Carbon 7 Point Crown Gust Vest",chineseName:"碳7点皇冠Gust马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"carbon_7_point_crown_gust_vest.jpg"},
+            {id:24,name:"Crown & Co. Fuse Hybrid Vest",chineseName:"皇冠和公司Fuse混合马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_fuse_hybrid_vest.jpg"},
+            {id:25,name:"7 Point Crown Dunes Vest",chineseName:"7点皇冠沙丘马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"7_point_crown_dunes_vest.jpg"},
+            {id:26,name:"Hot Head Harry Cradle Piqué Crewneck",chineseName:"火爆Harry摇篮针织圆领衫",category:"crewneck",categoryId:20,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"hot_head_harry_cradle_pi_qu_crewneck.jpg"},
+            {id:27,name:"Scotty Dog Cradle Piqué Crewneck",chineseName:"Scotty狗摇篮针织圆领衫",category:"crewneck",categoryId:20,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_dog_cradle_pi_qu_crewneck.jpg"},
+            {id:28,name:"Camo Dog Performance Quarter-Zip Hoodie",chineseName:"迷彩狗性能半拉链连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"camo_dog_performance_quarter-zip_hoodie.jpg"},
+            {id:29,name:"Agave Man Performance Hoodie",chineseName:"龙舌兰男人性能连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"agave_man_performance_hoodie.jpg"},
+            {id:30,name:"Crown & Co. Pullover",chineseName:"皇冠和公司套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_pullover.jpg"},
+            {id:31,name:"Scotty Bulldog Pullover",chineseName:"Scotty斗牛套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_bulldog_pullover.jpg"},
+            {id:32,name:"Regal Crown Pullover",chineseName:"皇家皇冠套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"regal_crown_pullover.jpg"},
+            {id:33,name:"Raceline 62 Hoodie",chineseName:"Raceline 62连帽衫",category:"casual",categoryId:60,rmbPrice:800,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"raceline_62_hoodie.jpg"},
+            {id:34,name:"Finish Line Crew Neck",chineseName:"终点圆领衫",category:"casual",categoryId:60,rmbPrice:800,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"finish_line_crew_neck.jpg"},
+            {id:35,name:"Last Call T-shirt",chineseName:"最后呼叫T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["M","L","XL"],imageFile:"last_call_t-shirt.jpg"},
+            {id:36,name:"Speed Dog T-shirt",chineseName:"速度狗T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"speed_dog_t-shirt.jpg"},
+            {id:37,name:"Supercharger Script T-shirt",chineseName:"增压器手写T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"supercharger_script_t-shirt.jpg"},
+            {id:38,name:"U.S. Eagle T-shirt",chineseName:"美国鹰T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"us_eagle_t-shirt.jpg"},
+            {id:39,name:"Crown Diamond T-shirt",chineseName:"皇冠钻石T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_diamond_t-shirt.jpg"},
+            {id:40,name:"Circle T Tour Script T-shirt",chineseName:"圆形T巡回手写T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"circle_t_tour_script_t-shirt.jpg"},
+            {id:41,name:"Speed Demon Work Shirt",chineseName:"速度恶魔工作服",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"speed_demon_work_shirt.jpg"}
+        ];
+
+        // Image paths - ADJUST THIS PATH TO MATCH YOUR IMAGE LOCATION
+        const imagePath = "./images/";
+
+        const categoryPricing = {
+            'hat': { price: '¥500', cnName: '帽子' },
+            'special-hat': { price: '¥1,200', cnName: '特色帽子' },
+            'beanie': { price: '¥640', cnName: '毛线帽' },
+            'polo': { price: '¥1,200', cnName: 'Polo 衫' },
+            'hoodie': { price: '¥1,600', cnName: '连帽卫衣' },
+            'crewneck': { price: '¥1,600', cnName: '圆领衫' },
+            'vest': { price: '¥2,000', cnName: '马甲' },
+            'casual': { price: '¥800', cnName: '休闲装' },
+            'tshirt': { price: '¥600', cnName: 'T 恤' }
+        };
+
+        const getChineseCategory = (catId) => {
+            const categories = {
+                10: 'Polo 衫', 20: '圆领衫', 30: '连帽卫衣', 40: '马甲',
+                50: '帽子', 51: '特色帽子', 52: '毛线帽', 60: '休闲装', 70: 'T 恤'
+            };
+            return categories[catId] || '服装';
+        };
+
+        const getChineseColor = (color) => {
+            return colorTranslations[color] || color;
+        };
+
+        const getImagePath = (product) => {
+            return imagePath + product.imageFile;
+        };
+
+        const categories = [...new Set(productsData.map(p => p.category))];
+        const filtersDiv = document.getElementById('filters');
+        let activeFilter = 'all';
+
+        const createFilterBtn = (category) => {
+            const btn = document.createElement('button');
+            btn.className = `filter-btn ${category === activeFilter ? 'active' : ''}`;
+            btn.textContent = category === 'all' ? '全部商品' : getChineseCategory({ hat:50, 'special-hat':51, beanie:52, polo:10, hoodie:30, crewneck:20, vest:40, casual:60, tshirt:70 }[category]);
+            btn.onclick = () => {
+                activeFilter = category;
+                renderFilters();
+                filterAndRenderProducts(category);
+            };
+            return btn;
+        };
+
+        const renderFilters = () => {
+            filtersDiv.innerHTML = '';
+            ['all', ...categories].forEach(cat => filtersDiv.appendChild(createFilterBtn(cat)));
+        };
+
+        const openModal = (product) => {
+            const modal = document.getElementById('imageModal');
+            document.getElementById('modalTitle').textContent = product.chineseName;
+            
+            const img = document.getElementById('mainProductImage');
+            img.src = getImagePath(product);
+            img.alt = `${product.name} - ${getChineseColor(product.color || '默认')}`;
+            
+            document.getElementById('modalColor').textContent = getChineseColor(product.color || '默认');
+            document.getElementById('modalPrice').textContent = `${product.rmbPrice}元`;
+
+            const thumbnailsContainer = document.getElementById('thumbnailContainer');
+            thumbnailsContainer.innerHTML = '';
+            
+            const viewLabels = ['正面 Front', '背面 Back', '细节 Detail'];
+            viewLabels.forEach((label, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumb.innerHTML = `<span style="font-size:2em">👕</span>`;
+                thumb.title = label;
+                
+                thumb.onclick = () => {
+                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                    img.alt = `${product.name} - ${label}`;
+                };
+                
+                thumbnailsContainer.appendChild(thumb);
+            });
+
+            modal.style.display = 'block';
+        };
+
+        const closeModal = () => {
+            document.getElementById('imageModal').style.display = 'none';
+        };
+
+        document.querySelector('.close').onclick = closeModal;
+        window.onclick = (e) => {
+            if (e.target.id === 'imageModal') closeModal();
+        };
+
+        const renderProducts = (filteredProducts) => {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+
+            filteredProducts.forEach(product => {
+                const chineseCategory = getChineseCategory(product.categoryId);
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                let sizesHtml = '';
+                if (product.size) {
+                    sizesHtml = `<span class="one-size-badge">均码</span>`;
+                } else if (product.sizes) {
+                    product.sizes.forEach(size => {
+                        const isAvailable = product.sizeAvailable.includes(size);
+                        sizesHtml += `<span class="${isAvailable ? 'size-badge' : 'size-unavailable'}">${size}</span>`;
+                    });
+                }
+
+                card.innerHTML = `
+                    <div class="product-image" onclick="openModal(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                        <span class="category-badge">${chineseCategory}</span>
+                        <img src="${getImagePath(product)}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <div class="image-loading" style="display:none">📷</div>
+                        <div class="image-error" style="display:block; color:#999; font-size:2em;">图片加载中...</div>
+                        <div class="click-hint"><i class="fas fa-eye"></i> 点击查看大图</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.chineseName}</h3>
+                        <p class="product-color"><i class="fas fa-circle" style="color: #666; font-size: 8px;"></i> ${getChineseColor(product.color || '默认')}</p>
+                        
+                        <div class="price-section">
+                            <div class="price-label">商品售价</div>
+                            <div class="rmb-price">${product.rmbPrice}元</div>
+                        </div>
+
+                        <div class="sizes-section">
+                            <div class="sizes-label">
+                                <i class="fas fa-tshirt"></i> 尺码
+                            </div>
+                            <div class="sizes-list">
+                                ${sizesHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                productsGrid.appendChild(card);
+            });
+        };
+
+        const filterAndRenderProducts = (filter) => {
+            let filtered = productsData;
+            if (filter !== 'all') {
+                filtered = productsData.filter(p => p.category === filter);
+            }
+            renderProducts(filtered);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('✅ Loaded products:', productsData.length, 'items');
+            console.log('📸 Images from:', imagePath);
+            renderFilters();
+            filterAndRenderProducts('all');
+        });
+    </script>
+</body>
+</html>
