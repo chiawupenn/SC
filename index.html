@@ -97,7 +97,7 @@
 
     <!-- Product Data with REAL Images -->
     <script>
-        // Color name translations to Chinese
+        // Translations
         const colorTranslations = {
             'Khaki': '卡其色', 'Heather Black': '麻黑色', 'Black': '黑色', 'Navy': '海军蓝',
             'Red/White/Blue': '红白蓝三色', 'White': '白色', 'Stream Blue': '河流蓝', 'Oyster': '牡蛎色',
@@ -109,211 +109,94 @@
             'Grey': '灰色', 'Carbon Black': '碳黑色', 'Ivory': '象牙白'
         };
 
-        // ALL 41 PRODUCTS WITH REAL IMAGE PATHS
+        // FIXED: Filenames now match your 'ls images/' output exactly
         const productsData = [
-            {id:1,name:"Feelin' Lucky Flexfit Trucker Hat",chineseName:"精选圈 T 卡车帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"feelin_lucky_flexfit_trucker_hat.jpg"},
-            {id:2,name:"Two-Tone Horseshoe Retro Trucker Hat",chineseName:"双拼马蹄复古卡车帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"two-tone_horseshoe_retro_trucker_hat.jpg"},
-            {id:3,name:"Black Oval SC Crown Patch Melin Odysea Hydro Hat",chineseName:"黑色椭圆SC皇冠补丁水力帽",category:"special-hat",categoryId:51,rmbPrice:1200,size:"One Size",imageFile:"black_oval_sc_crown_patch_melin_odyssea_hydro_hat.jpg"},
-            {id:4,name:"Scotty Crown Retro Rope Hat",chineseName:"Scotty Crown 复古绳帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"scotty_crown_retro_rope_hat.jpg"},
-            {id:5,name:"Americana Beanie",chineseName:"美利奴羊毛帽",category:"beanie",categoryId:52,rmbPrice:640,size:"One Size",imageFile:"americana_beans.jpg"},
-            {id:6,name:"Agave Man & Clover Polo Shirt",chineseName:"龙舌兰男人和三叶草Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["M","L","XL"],imageFile:"agave_man_clover_polo_shirt.jpg"},
-            {id:7,name:"Stream Blue 7 Point Crown Polo Shirt",chineseName:"溪流蓝7点皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"stream_blue_7_point_crown_polo_shirt.jpg"},
-            {id:8,name:"Scotty Bulldog Oyster Roast Polo Shirt",chineseName:"Scotty斗牛牡蛎烤Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_bulldog_oyster_roast_polo_shirt.jpg"},
-            {id:9,name:"Jackpot Johnny Polo Shirt",chineseName:"Jackpot Johnny Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"jackpot_johnny_polo_shirt.jpg"},
-            {id:10,name:"Crown & Co. Polo Shirt",chineseName:"皇冠和公司Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_polo_shirt.jpg"},
-            {id:11,name:"7 Point Crown Lights Polo Shirt",chineseName:"7点皇冠灯Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"7_point_crown_lights_polo_shirt.jpg"},
-            {id:12,name:"Crown & Co. Striped Polo Shirt",chineseName:"皇冠和公司条纹Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_striped_polo_shirt.jpg"},
-            {id:13,name:"Hot Head Harry Polo Shirt",chineseName:"火爆Harry Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"hot_head_harry_polo_shirt_1.jpg"},
-            {id:14,name:"Jackpot Johnny Geo Skull Polo Shirt",chineseName:"Jackpot Johnny几何骷髅Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"jackpot_johnny_geo_skull_polo_shirt.jpg"},
-            {id:15,name:"Agave Man Tequila Sunrise Polo Shirt",chineseName:"龙舌兰男人龙舌兰日出Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"agave_man_tequila_sunrise_polo_shirt.jpg"},
-            {id:16,name:"Agave Man Cocktail Garnish Polo Shirt",chineseName:"龙舌兰男人鸡尾酒装饰Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"agave_man_cocktail_garnish_polo_shirt.jpg"},
-            {id:17,name:"Hot Head Harry Polo Shirt (Marine Nav)",chineseName:"火爆Harry Polo衫（海军导航）",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"hot_head_harry_polo_shirt_2.jpg"},
-            {id:18,name:"Scotty Dog Polo Shirt",chineseName:"Scotty狗Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_dog_polo_shirt.jpg"},
-            {id:19,name:"Striped 7 Point Crown Polo Shirt",chineseName:"条纹7点皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"striped_7_point_crown_polo_shirt.jpg"},
-            {id:20,name:"LS Peace Crown Polo Shirt",chineseName:"和平皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"ls_peace_crown_polo_shirt.jpg"},
-            {id:21,name:"Women's 7 Point Crown Zip Neck Polo Shirt",chineseName:"女士7点皇冠拉链领Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["XS","S","M","L","XL"],sizeAvailable:["XS","S","M","L","XL"],imageFile:"womens_7_point_crown_zip_neck_polo_shirt.jpg"},
-            {id:22,name:"Women's Scotty Dog Flora Knit Hoodie",chineseName:"女士Scotty狗花卉针织连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["XS","S","M","L","XL"],sizeAvailable:["S","M","L"],imageFile:"womens_scotty_dog_flora_knit_hoodie.jpg"},
-            {id:23,name:"Carbon 7 Point Crown Gust Vest",chineseName:"碳7点皇冠Gust马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"carbon_7_point_crown_gust_vest.jpg"},
-            {id:24,name:"Crown & Co. Fuse Hybrid Vest",chineseName:"皇冠和公司Fuse混合马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_fuse_hybrid_vest.jpg"},
-            {id:25,name:"7 Point Crown Dunes Vest",chineseName:"7点皇冠沙丘马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"7_point_crown_dunes_vest.jpg"},
-            {id:26,name:"Hot Head Harry Cradle Piqué Crewneck",chineseName:"火爆Harry摇篮针织圆领衫",category:"crewneck",categoryId:20,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"hot_head_harry_cradle_pi_qu_crewneck.jpg"},
-            {id:27,name:"Scotty Dog Cradle Piqué Crewneck",chineseName:"Scotty狗摇篮针织圆领衫",category:"crewneck",categoryId:20,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_dog_cradle_pi_qu_crewneck.jpg"},
-            {id:28,name:"Camo Dog Performance Quarter-Zip Hoodie",chineseName:"迷彩狗性能半拉链连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"camo_dog_performance_quarter-zip_hoodie.jpg"},
-            {id:29,name:"Agave Man Performance Hoodie",chineseName:"龙舌兰男人性能连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"agave_man_performance_hoodie.jpg"},
-            {id:30,name:"Crown & Co. Pullover",chineseName:"皇冠和公司套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_co_pullover.jpg"},
-            {id:31,name:"Scotty Bulldog Pullover",chineseName:"Scotty斗牛套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"scotty_bulldog_pullover.jpg"},
-            {id:32,name:"Regal Crown Pullover",chineseName:"皇家皇冠套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"regal_crown_pullover.jpg"},
-            {id:33,name:"Raceline 62 Hoodie",chineseName:"Raceline 62连帽衫",category:"casual",categoryId:60,rmbPrice:800,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"raceline_62_hoodie.jpg"},
-            {id:34,name:"Finish Line Crew Neck",chineseName:"终点圆领衫",category:"casual",categoryId:60,rmbPrice:800,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"finish_line_crew_neck.jpg"},
-            {id:35,name:"Last Call T-shirt",chineseName:"最后呼叫T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["M","L","XL"],imageFile:"last_call_t-shirt.jpg"},
-            {id:36,name:"Speed Dog T-shirt",chineseName:"速度狗T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"speed_dog_t-shirt.jpg"},
-            {id:37,name:"Supercharger Script T-shirt",chineseName:"增压器手写T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"supercharger_script_t-shirt.jpg"},
-            {id:38,name:"U.S. Eagle T-shirt",chineseName:"美国鹰T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"us_eagle_t-shirt.jpg"},
-            {id:39,name:"Crown Diamond T-shirt",chineseName:"皇冠钻石T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"crown_diamond_t-shirt.jpg"},
-            {id:40,name:"Circle T Tour Script T-shirt",chineseName:"圆形T巡回手写T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"circle_t_tour_script_t-shirt.jpg"},
-            {id:41,name:"Speed Demon Work Shirt",chineseName:"速度恶魔工作服",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"speed_demon_work_shirt.jpg"}
+            {id:1,name:"Feelin' Lucky Flexfit Trucker Hat",chineseName:"精选圈 T 卡车帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"Feelin_Lucky_Flexfit_Trucker_Hat.jpg"},
+            {id:2,name:"Two-Tone Horseshoe Retro Trucker Hat",chineseName:"双拼马蹄复古卡车帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"Two-Tone_Horseshoe_Retro_Trucker_Hat.jpg"},
+            {id:3,name:"Black Oval SC Crown Patch Melin Odysea Hydro Hat",chineseName:"黑色椭圆SC皇冠补丁水力帽",category:"special-hat",categoryId:51,rmbPrice:1200,size:"One Size",imageFile:"Black_Oval_SC_Crown_Patch_Melin_Odysea_Hydro_Hat.jpg"},
+            {id:4,name:"Scotty Crown Retro Rope Hat",chineseName:"Scotty Crown 复古绳帽",category:"hat",categoryId:50,rmbPrice:500,size:"One Size",imageFile:"Scotty_Crown_Retro_Rope_Hat.jpg"},
+            {id:5,name:"Americana Beanie",chineseName:"美利奴羊毛帽",category:"beanie",categoryId:52,rmbPrice:640,size:"One Size",imageFile:"Americana_Beanie.jpg"},
+            {id:6,name:"Agave Man & Clover Polo Shirt",chineseName:"龙舌兰男人和三叶草Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["M","L","XL"],imageFile:"Agave_Man_Clover_Polo_Shirt.jpg"},
+            {id:7,name:"Stream Blue 7 Point Crown Polo Shirt",chineseName:"溪流蓝7点皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Stream_Blue_7_Point_Crown_Polo_Shirt.jpg"},
+            {id:8,name:"Scotty Bulldog Oyster Roast Polo Shirt",chineseName:"Scotty斗牛牡蛎烤Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Scotty_Bulldog_Oyster_Roast_Polo_Shirt.jpg"},
+            {id:9,name:"Jackpot Johnny Polo Shirt",chineseName:"Jackpot Johnny Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Jackpot_Johnny_Polo_Shirt.jpg"},
+            {id:10,name:"Crown & Co. Polo Shirt",chineseName:"皇冠和公司Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Crown_Co_Polo_Shirt.jpg"},
+            {id:11,name:"7 Point Crown Lights Polo Shirt",chineseName:"7点皇冠灯Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"7_Point_Crown_Lights_Polo_Shirt.jpg"},
+            {id:12,name:"Crown & Co. Striped Polo Shirt",chineseName:"皇冠和公司条纹Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Crown_Co_Striped_Polo_Shirt.jpg"},
+            {id:13,name:"Hot Head Harry Polo Shirt",chineseName:"火爆Harry Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Hot_Head_Harry_Polo_Shirt_1.jpg"},
+            {id:14,name:"Jackpot Johnny Geo Skull Polo Shirt",chineseName:"Jackpot Johnny几何骷髅Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Jackpot_Johnny_Geo_Skull_Polo_Shirt.jpg"},
+            {id:15,name:"Agave Man Tequila Sunrise Polo Shirt",chineseName:"龙舌兰男人龙舌兰日出Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Agave_Man_Tequila_Sunrise_Polo_Shirt.jpg"},
+            {id:16,name:"Agave Man Cocktail Garnish Polo Shirt",chineseName:"龙舌兰男人鸡尾酒装饰Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Agave_Man_Cocktail_Garnish_Polo_Shirt.jpg"},
+            {id:17,name:"Hot Head Harry Polo Shirt 2",chineseName:"火爆Harry Polo衫 2",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Hot_Head_Harry_Polo_Shirt_2.jpg"},
+            {id:18,name:"Scotty Dog Polo Shirt",chineseName:"Scotty狗Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Scotty_Dog_Polo_Shirt.jpg"},
+            {id:19,name:"Striped 7 Point Crown Polo Shirt",chineseName:"条纹7点皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Striped_7_Point_Crown_Polo_Shirt.jpg"},
+            {id:20,name:"LS Peace Crown Polo Shirt",chineseName:"和平皇冠Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"LS_Peace_Crown_Polo_Shirt.jpg"},
+            {id:21,name:"Women's 7 Point Crown Zip Neck Polo Shirt",chineseName:"女士7点皇冠拉链领Polo衫",category:"polo",categoryId:10,rmbPrice:1200,sizes:["XS","S","M","L","XL"],sizeAvailable:["XS","S","M","L","XL"],imageFile:"Womens_7_Point_Crown_Zip_Neck_Polo_Shirt.jpg"},
+            {id:22,name:"Women's Scotty Dog Flora Knit Hoodie",chineseName:"女士Scotty狗花卉针织连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["XS","S","M","L","XL"],sizeAvailable:["S","M","L"],imageFile:"Womens_Scotty_Dog_Flora_Knit_Hoodie.jpg"},
+            {id:23,name:"Carbon 7 Point Crown Gust Vest",chineseName:"碳7点皇冠Gust马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Carbon_7_Point_Crown_Gust_Vest.jpg"},
+            {id:24,name:"Crown & Co. Fuse Hybrid Vest",chineseName:"皇冠和公司Fuse混合马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Crown_Co_Fuse_Hybrid_Vest.jpg"},
+            {id:25,name:"7 Point Crown Dunes Vest",chineseName:"7点皇冠沙丘马甲",category:"vest",categoryId:40,rmbPrice:2000,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"7_Point_Crown_Dunes_Vest.jpg"},
+            {id:26,name:"Hot Head Harry Cradle Piqué Crewneck",chineseName:"火爆Harry摇篮针织圆领衫",category:"crewneck",categoryId:20,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Hot_Head_Harry_Cradle_Piqu_Crewneck.jpg"},
+            {id:27,name:"Scotty Dog Cradle Piqué Crewneck",chineseName:"Scotty狗摇篮针织圆领衫",category:"crewneck",categoryId:20,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Scotty_Dog_Cradle_Piqu_Crewneck.jpg"},
+            {id:28,name:"Camo Dog Performance Quarter-Zip Hoodie",chineseName:"迷彩狗性能半拉链连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Camo_Dog_Performance_Quarter-Zip_Hoodie.jpg"},
+            {id:29,name:"Agave Man Performance Hoodie",chineseName:"龙舌兰男人性能连帽衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Agave_Man_Performance_Hoodie.jpg"},
+            {id:30,name:"Crown & Co. Pullover",chineseName:"皇冠和公司套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Crown_Co_Pullover.jpg"},
+            {id:31,name:"Scotty Bulldog Pullover",chineseName:"Scotty斗牛套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Scotty_Bulldog_Pullover.jpg"},
+            {id:32,name:"Regal Crown Pullover",chineseName:"皇家皇冠套头衫",category:"hoodie",categoryId:30,rmbPrice:1600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Regal_Crown_Pullover.jpg"},
+            {id:33,name:"Raceline 62 Hoodie",chineseName:"Raceline 62连帽衫",category:"casual",categoryId:60,rmbPrice:800,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Raceline_62_Hoodie.jpg"},
+            {id:34,name:"Finish Line Crew Neck",chineseName:"终点圆领衫",category:"casual",categoryId:60,rmbPrice:800,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Finish_Line_Crew_Neck.jpg"},
+            {id:35,name:"Last Call T-shirt",chineseName:"最后呼叫T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["M","L","XL"],imageFile:"Last_Call_T-shirt.jpg"},
+            {id:36,name:"Speed Dog T-shirt",chineseName:"速度狗T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Speed_Dog_T-shirt.jpg"},
+            {id:37,name:"Supercharger Script T-shirt",chineseName:"增压器手写T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Supercharger_Script_T-shirt.jpg"},
+            {id:38,name:"U.S. Eagle T-shirt",chineseName:"美国鹰T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"US_Eagle_T-shirt.jpg"},
+            {id:39,name:"Crown Diamond T-shirt",chineseName:"皇冠钻石T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Crown_Diamond_T-shirt.jpg"},
+            {id:40,name:"Circle T Tour Script T-shirt",chineseName:"圆形T巡回手写T恤",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Circle_T_Tour_Script_T-shirt.jpg"},
+            {id:41,name:"Speed Demon Work Shirt",chineseName:"速度恶魔工作服",category:"tshirt",categoryId:70,rmbPrice:600,sizes:["S","M","L","XL","XXL"],sizeAvailable:["S","M","L","XL","XXL"],imageFile:"Speed_Demon_Work_Shirt.jpg"}
         ];
 
-        // Image paths - ADJUST THIS PATH TO MATCH YOUR IMAGE LOCATION
-        const imagePath = "./images/";
+        const imagePath = "images/";
 
-        const categoryPricing = {
-            'hat': { price: '¥500', cnName: '帽子' },
-            'special-hat': { price: '¥1,200', cnName: '特色帽子' },
-            'beanie': { price: '¥640', cnName: '毛线帽' },
-            'polo': { price: '¥1,200', cnName: 'Polo 衫' },
-            'hoodie': { price: '¥1,600', cnName: '连帽卫衣' },
-            'crewneck': { price: '¥1,600', cnName: '圆领衫' },
-            'vest': { price: '¥2,000', cnName: '马甲' },
-            'casual': { price: '¥800', cnName: '休闲装' },
-            'tshirt': { price: '¥600', cnName: 'T 恤' }
-        };
-
+        // Utility functions
         const getChineseCategory = (catId) => {
-            const categories = {
-                10: 'Polo 衫', 20: '圆领衫', 30: '连帽卫衣', 40: '马甲',
-                50: '帽子', 51: '特色帽子', 52: '毛线帽', 60: '休闲装', 70: 'T 恤'
-            };
+            const categories = { 10:'Polo 衫', 20:'圆领衫', 30:'连帽卫衣', 40:'马甲', 50:'帽子', 51:'特色帽子', 52:'毛线帽', 60:'休闲装', 70:'T 恤' };
             return categories[catId] || '服装';
         };
 
-        const getChineseColor = (color) => {
-            return colorTranslations[color] || color;
-        };
+        const getImagePath = (product) => imagePath + product.imageFile;
 
-        const getImagePath = (product) => {
-            return imagePath + product.imageFile;
-        };
-
-        const categories = [...new Set(productsData.map(p => p.category))];
-        const filtersDiv = document.getElementById('filters');
-        let activeFilter = 'all';
-
-        const createFilterBtn = (category) => {
-            const btn = document.createElement('button');
-            btn.className = `filter-btn ${category === activeFilter ? 'active' : ''}`;
-            btn.textContent = category === 'all' ? '全部商品' : getChineseCategory({ hat:50, 'special-hat':51, beanie:52, polo:10, hoodie:30, crewneck:20, vest:40, casual:60, tshirt:70 }[category]);
-            btn.onclick = () => {
-                activeFilter = category;
-                renderFilters();
-                filterAndRenderProducts(category);
-            };
-            return btn;
-        };
-
-        const renderFilters = () => {
-            filtersDiv.innerHTML = '';
-            ['all', ...categories].forEach(cat => filtersDiv.appendChild(createFilterBtn(cat)));
-        };
-
-        const openModal = (product) => {
-            const modal = document.getElementById('imageModal');
-            document.getElementById('modalTitle').textContent = product.chineseName;
-            
-            const img = document.getElementById('mainProductImage');
-            img.src = getImagePath(product);
-            img.alt = `${product.name} - ${getChineseColor(product.color || '默认')}`;
-            
-            document.getElementById('modalColor').textContent = getChineseColor(product.color || '默认');
-            document.getElementById('modalPrice').textContent = `${product.rmbPrice}元`;
-
-            const thumbnailsContainer = document.getElementById('thumbnailContainer');
-            thumbnailsContainer.innerHTML = '';
-            
-            const viewLabels = ['正面 Front', '背面 Back', '细节 Detail'];
-            viewLabels.forEach((label, index) => {
-                const thumb = document.createElement('div');
-                thumb.className = `thumbnail ${index === 0 ? 'active' : ''}`;
-                thumb.innerHTML = `<span style="font-size:2em">👕</span>`;
-                thumb.title = label;
-                
-                thumb.onclick = () => {
-                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                    thumb.classList.add('active');
-                    img.alt = `${product.name} - ${label}`;
-                };
-                
-                thumbnailsContainer.appendChild(thumb);
-            });
-
-            modal.style.display = 'block';
-        };
-
-        const closeModal = () => {
-            document.getElementById('imageModal').style.display = 'none';
-        };
-
-        document.querySelector('.close').onclick = closeModal;
-        window.onclick = (e) => {
-            if (e.target.id === 'imageModal') closeModal();
-        };
-
-        const renderProducts = (filteredProducts) => {
-            const productsGrid = document.getElementById('productsGrid');
-            productsGrid.innerHTML = '';
-
-            filteredProducts.forEach(product => {
-                const chineseCategory = getChineseCategory(product.categoryId);
-                
+        // Render functions
+        const renderProducts = (filtered) => {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-
-                let sizesHtml = '';
-                if (product.size) {
-                    sizesHtml = `<span class="one-size-badge">均码</span>`;
-                } else if (product.sizes) {
-                    product.sizes.forEach(size => {
-                        const isAvailable = product.sizeAvailable.includes(size);
-                        sizesHtml += `<span class="${isAvailable ? 'size-badge' : 'size-unavailable'}">${size}</span>`;
-                    });
-                }
-
                 card.innerHTML = `
-                    <div class="product-image" onclick="openModal(${JSON.stringify(product).replace(/"/g, '&quot;')})">
-                        <span class="category-badge">${chineseCategory}</span>
-                        <img src="${getImagePath(product)}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <div class="image-loading" style="display:none">📷</div>
-                        <div class="image-error" style="display:block; color:#999; font-size:2em;">图片加载中...</div>
-                        <div class="click-hint"><i class="fas fa-eye"></i> 点击查看大图</div>
+                    <div class="product-image" onclick="openModal(${p.id})">
+                        <span class="category-badge">${getChineseCategory(p.categoryId)}</span>
+                        <img src="${getImagePath(p)}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Missing'">
                     </div>
                     <div class="product-info">
-                        <h3 class="product-name">${product.chineseName}</h3>
-                        <p class="product-color"><i class="fas fa-circle" style="color: #666; font-size: 8px;"></i> ${getChineseColor(product.color || '默认')}</p>
-                        
-                        <div class="price-section">
-                            <div class="price-label">商品售价</div>
-                            <div class="rmb-price">${product.rmbPrice}元</div>
-                        </div>
-
-                        <div class="sizes-section">
-                            <div class="sizes-label">
-                                <i class="fas fa-tshirt"></i> 尺码
-                            </div>
-                            <div class="sizes-list">
-                                ${sizesHtml}
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                productsGrid.appendChild(card);
+                        <h3 class="product-name">${p.chineseName}</h3>
+                        <div class="price-section"><div class="rmb-price">${p.rmbPrice}元</div></div>
+                    </div>`;
+                grid.appendChild(card);
             });
         };
 
-        const filterAndRenderProducts = (filter) => {
-            let filtered = productsData;
-            if (filter !== 'all') {
-                filtered = productsData.filter(p => p.category === filter);
-            }
-            renderProducts(filtered);
+        const openModal = (id) => {
+            const p = productsData.find(x => x.id === id);
+            document.getElementById('modalTitle').textContent = p.chineseName;
+            document.getElementById('mainProductImage').src = getImagePath(p);
+            document.getElementById('modalPrice').textContent = `${p.rmbPrice}元`;
+            document.getElementById('imageModal').style.display = 'block';
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('✅ Loaded products:', productsData.length, 'items');
-            console.log('📸 Images from:', imagePath);
-            renderFilters();
-            filterAndRenderProducts('all');
-        });
+        const closeModal = () => document.getElementById('imageModal').style.display = 'none';
+        document.querySelector('.close').onclick = closeModal;
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => renderProducts(productsData));
     </script>
 </body>
 </html>
